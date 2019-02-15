@@ -1,0 +1,38 @@
+﻿    @using WebApplication.Models;
+    @model List<Vacancie>
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <header>
+        <link rel="stylesheet" type="text/css" href="~/css/VacanciesStyles.css" />
+    </header>
+    <html>
+    <body>
+        <div class="MainContent">
+            @foreach (var vc in Model)
+            {
+                <div class="Vacancie">
+                    <div class="VacancieHeader">
+                        <h1 class="Headline">@vc.Headline</h1>
+                        <h1 class="EmployementType">@vc.EmployementType</h1>
+                        <h1 class="Salary">@vc.Salary</h1>
+                        <h1 class="Organization">@vc.Organization</h1>
+                    </div>
+                    <div class="Description">
+                        <p>@vc.Description</p>
+                    </div>
+                    @if (vc.ContactPerson != null)
+                    {
+                        <div class="Contacts">
+                            <h1 class="ContactPerson">@vc.ContactPerson</h1>
+                            <h1 class="PhoneNumber">@vc.Contacts</h1>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </body>
+</html>
