@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication.Models
+namespace BusinessLogic.Models
 {
     public class Vacancie
     {
-        public int ID { get; set; }
+        [Key]
+        public string Identificator { get; set; }
+
         public string Url { get; set; }
         public string Headline { get; set; }
         public string Salary { get; set; }

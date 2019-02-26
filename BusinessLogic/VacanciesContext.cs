@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebApplication.Models;
+﻿using BusinessLogic.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication
+namespace BusinessLogic
 {
     public class VacanciesContext : DbContext
     {

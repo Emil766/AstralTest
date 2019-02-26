@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApplication.Migrations
 {
-    public partial class InitMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +10,7 @@ namespace WebApplication.Migrations
                 name: "Vacancies",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Identificator = table.Column<string>(nullable: false),
                     Url = table.Column<string>(nullable: true),
                     Headline = table.Column<string>(nullable: true),
                     Salary = table.Column<string>(nullable: true),
@@ -24,7 +22,7 @@ namespace WebApplication.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vacancies", x => x.ID);
+                    table.PrimaryKey("PK_Vacancies", x => x.Identificator);
                 });
         }
 

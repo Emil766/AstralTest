@@ -1,14 +1,12 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using BusinessLogic.Models;
+using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    class HHParser
+    public class HHParser
     {
         private readonly string Url = "https://kaluga.hh.ru/search/vacancy?area=43&clusters=true&enable_snippets=true&specialization=1&page=";
         public List<Vacancie> HHVacancies { get; set; }

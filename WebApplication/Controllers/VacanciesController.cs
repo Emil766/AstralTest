@@ -1,42 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using BusinessLogic;
+using BusinessLogic.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    [Route("/Vacancies")]
     public class VacanciesController : Controller
     {
-        private readonly DbContextOptions<VacanciesContext> dbContextOptions = new DbContextOptionsBuilder<VacanciesContext>().UseSqlServer("Data Source=Emil;Initial Catalog=VacanciesContext;Integrated Security=True").Options;
-        VacanciesContext db;
-        HHParser parser;
-        List<Vacancie> vacancies;
+        private VacanciesService _vacanciesService;
 
-        public IActionResult Vacancies()
+        public VacanciesController(VacanciesService vacanciesService)
         {
-            parser = new HHParser();
-            parser.DownloadHHLinks(50);
-            if (parser.HHVacancies.Count != 0)
-            {
-                vacancies = parser.HHVacancies;
-                using (db = new VacanciesContext(dbContextOptions))
-                {
-                    db.Vacancies.RemoveRange(db.Vacancies);
-                    db.Vacancies.AddRange(parser.HHVacancies);
-                    db.SaveChanges();
-                }
-            }
-            else
-            {
-                using (db = new VacanciesContext(dbContextOptions))
-                {
-                    vacancies = db.Vacancies.ToList();
-                }
-            }
-            return View("Vacancies", vacancies);
+            _vacanciesService = vacanciesService;
+        }
+
+        [HttpGet]
+        public List<Vacancie> GetVacancies()
+        {
+            return _vacanciesService.GetVacancies();
+        }
+
+        [HttpPost]
+        public void CreateVacancie(Vacancie vacancie)
+        {
+            _vacanciesService.CreateVacancy(vacancie);
+        }
+
+        [HttpPut]
+        public void UpdateVacacie(Vacancie vacancie)
+        {
+            _vacanciesService.UpdateVacancy(vacancie);
+        }
+
+        [HttpDelete]
+        public void DeleteVacancie(string id)
+        {
+            _vacanciesService.DeleteVacancy(id);
+        }
+
+        [HttpDelete("all")]
+        public void DeleteAll()
+        {
+            _vacanciesService.DeleteVacancies();
         }
     }
 }
